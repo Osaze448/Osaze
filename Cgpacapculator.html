@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+</head>
+<body>
+    <h2>CGPA Calculator</h2>
+    <label for="totalSubjects">Total Subjects:</label>
+    <input type="number" id="totalSubjects" placeholder="Enter total number of subjects">
+    <br>
+    
+    <div id="subjectGrades"></div>
+    
+    <button onclick="addSubject()">Add Subject</button>
+    <button onclick="calculateCGPA()">Calculate CGPA</button>
+    <br>
+    <p id="result"></p>
+
+    <script>
+        function addSubject() {
+            var totalSubjects = parseInt(document.getElementById("totalSubjects").value);
+            var subjectGradesDiv = document.getElementById("subjectGrades");
+
+            subjectGradesDiv.innerHTML = "";
+
+            for (var i = 1; i <= totalSubjects; i++) {
+                subjectGradesDiv.innerHTML += "<label for='subject" + i + "'>Subject " + i + " Grade:</label> " +
+                    "<input type='number' id='subject" + i + "' placeholder='Enter grade for subject " + i + "'><br>";
+            }
+        }
+
+        function calculateCGPA() {
+            var totalSubjects = parseInt(document.getElementById("totalSubjects").value);
+            var totalGradePoints = 0;
+            var totalCredits = 0;
+
+            for (var i = 1; i <= totalSubjects; i++) {
+                var grade = parseFloat(document.getElementById("subject" + i).value);
+                totalGradePoints += grade;
+                totalCredits += 1; // Assuming each subject has 1 credit. Modify this if needed.
+            }
+
+            var cgpa = totalGradePoints / totalCredits;
+
+            document.getElementById("result").innerHTML = "CGPA: " + cgpa.toFixed(2);
+        }
+    </script>
+</body>
+</html>
