@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Calculator</title>
+</head>
+<body>
+    <h2>Compound Interest Calculator</h2>
+    <label for="principal">Principal:</label>
+    <input type="number" id="principal" placeholder="Enter principal amount">
+    <br>
+    <label for="rate">Rate (% per annum):</label>
+    <input type="number" id="rate" placeholder="Enter interest rate">
+    <br>
+    <label for="time">Time (years):</label>
+    <input type="number" id="time" placeholder="Enter time in years">
+    <br>
+    <label for="frequency">Compound Frequency:</label>
+    <select id="frequency">
+        <option value="1">Annually</option>
+        <option value="2">Semi-Annually</option>
+        <option value="4">Quarterly</option>
+        <option value="12">Monthly</option>
+    </select>
+    <br>
+    <button onclick="calculateCompoundInterest()">Calculate</button>
+    <br>
+    <p id="result"></p>
+
+    <script>
+        function calculateCompoundInterest() {
+            var principal = parseFloat(document.getElementById("principal").value);
+            var rate = parseFloat(document.getElementById("rate").value);
+            var time = parseFloat(document.getElementById("time").value);
+            var frequency = parseInt(document.getElementById("frequency").value);
+
+            var n = frequency;
+            var r = rate / (100 * frequency);
+            var t = time * frequency;
+
+            var amount = principal * Math.pow((1 + r), t);
+
+            var compoundInterest = amount - principal;
+
+            document.getElementById("result").innerHTML = "Compound Interest: $" + compoundInterest.toFixed(2) + "<br>Total Amount: $" + amount.toFixed(2);
+        }
+    </script>
+</body>
+</html>
